@@ -1,0 +1,13 @@
+<section id = "about" class = "about-section text-white">
+
+<a href="watch/{{symbols}}" class="btn btn-primary">Add to List</a>
+
+{% for v in videolist %}
+    <h2>
+        {{v.title}}
+    </h2>
+    <h2>
+        {{v.url}}
+    </h2>
+{% endfor %}
+</section>
