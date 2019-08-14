@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from bs4 import BeautifulSoup as bs
 import requests
 from playlist.classes import SongData
-from playlist.serializeres import SongSerializer, PlaylistSerializer
+from playlist.serializer import SongSerializer, PlaylistSerializer
 
 
 # Create your views here.
@@ -36,5 +36,8 @@ def songlist(request):
 def addtoPlaylist(request):
     return redirect('PlayList.html')
 
+
+def login(request):
+    request.user
 
 
