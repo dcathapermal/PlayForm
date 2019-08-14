@@ -1,4 +1,4 @@
 class SongData:
-    def __init__(self, title, code):
+    def __init__(self, title, url):
         self.title = title
-        self.code = code
+        self.url = url

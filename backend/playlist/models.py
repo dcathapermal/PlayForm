@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 
 class Song(models.Model):
     name = models.TextField()
-    price = models.FloatField()
+    url = models.TextField()
 
 class Playlist(models.Model):
     songs = models.ManyToManyField(Song)
 
-# class UserSettings(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     songs = models.ManyToManyField(Song) 
+class UserSettings(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    playlist = models.ManyToManyField(Playlist) 

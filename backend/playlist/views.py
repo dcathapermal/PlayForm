@@ -6,15 +6,14 @@ from django.contrib.auth.decorators import login_required
 from bs4 import BeautifulSoup as bs
 import requests
 from playlist.classes import SongData
+from playlist.serializeres import SongSerializer, PlaylistSerializer
 
 
 # Create your views here.
 
 def songSearch(request):
     base = "https://www.youtube.com/results?search_query="
-
     q = request.GET.get('song_search', '')
-
     r = requests.get(base+q)
     page = r.text
     soup=bs(page,'html.parser')
@@ -22,9 +21,9 @@ def songSearch(request):
     videolist=[]
 
     for v in vids:
-        code = v['href']
+        url = 'https://www.youtube.com' + v['href']
         title = v['title']
-        videoData = SongData(title, code)
+        videoData = SongData(title, url)
         if len(url) == 43:
             videolist.append(videoData)
 
