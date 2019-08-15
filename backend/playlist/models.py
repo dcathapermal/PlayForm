@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -8,8 +7,11 @@ class Song(models.Model):
     code = models.TextField(default = "")
 
 class Playlist(models.Model):
+    user = models.TextField(default = "")
+    name = models.TextField(default = "")
     songs = models.ManyToManyField(Song)
 
-class UserSettings(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    playlist = models.ManyToManyField(Song) 
+# class UserSettings(models.Model):
+#     # user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     user = models.TextField(default = "")
+#     playlists = models.ManyToManyField(Playlist) 

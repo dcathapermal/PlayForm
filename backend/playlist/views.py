@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from playlist.models import Song, Playlist, UserSettings
+from playlist.models import Song, Playlist
 import requests, time
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
@@ -32,24 +32,50 @@ def songSearch(request):
         if len(code) == 11:
             songlist.append(song)
     serializer = SongSerializer(songlist, many=True)
+    print(serializer.data)
     return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def playlist(request):
+def addToPlaylist(request):
     data = json.loads(request.body.decode('utf-8'))
-    song, song_created = Song.objects.get_or_create(name=data['name'], code=data['code'])
-    song.save()
+    song = Song.objects.create(name=data['name'], code=data['code'])
 
-    if song_created:
-        user_settings, created = UserSettings.objects.get_or_create(user = data['user_token'])
-        user_settings.playlist.add(song)
-        user_settings.save()
+    playlist, created = Playlist.objects.get_or_create(name = data['playlist_name'], user = str(data['user_token']))
+    playlist.songs.add(song)
+    playlist.save()
+    # except Playlist.DoesNotExist:
+    #     playlist = Playlist.objects.create(name = name, user = str(data['user_token']))
+    # user_settings.playlists.addPlaylist
 
+    # userSerialized = UserSerializer(user_settings)
+
+    # userdata = dict(userSerialized.data)
+    # playlists = userdata['playlists']
+    # if 'default' in playlists:
+    #     playlists['default'].append(song)
+    # else:
+
+    # user_settings.save()
+
+    # playlistSerialized = PlaylistSerializer(data=song)
+    # if playlistSerialized.is_valid():
+    #     playlistSerialized.save()
+    
+    
+
+    # return JsonResponse(playlistSerialized.data, safe=False)
     return HttpResponse('song saved to playlist', status =200)
 
-def addtoPlaylist(request):
-    return redirect('PlayList.html')
-
-
-
-
+@csrf_exempt
+def returnPlaylist(request):
+    user = request.GET.get("user", "")
+    name = request.GET.get("name", "")
+    try:
+        playlist = Playlist.objects.get(user = user, name = name)
+        # print(list(playlist.songs.all())) 
+        serializedSongs = SongSerializer(list(playlist.songs.all()), many=True)
+        print(serializedSongs.data)
+        return JsonResponse(serializedSongs.data, safe = False)
+        # return JsonResponse(serializedSongs, safe = False)
+    except Playlist.DoesNotExist:
+        return HttpResponse('Erreur', status = 400)

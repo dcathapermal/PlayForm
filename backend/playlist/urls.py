@@ -7,7 +7,8 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('songsearch', views.songSearch),
-    path('playlist', views.playlist),
+    path('playlist', views.addToPlaylist),
     path('login', obtain_auth_token, name='api_token_auth'),
+    path('getList', views.returnPlaylist),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 ]

@@ -35,19 +35,24 @@ class DjangoService {
 
     create_user(user, email, password1, password2) {
         return(axios.post(`${API_URL}/rest-auth/registration/`, {username: user, email: email, password1: password1, password2: password2}))
-    
     }
 
     song_search(query){
         return(axios.get(`${API_URL}/songsearch?query=${query}`));
     }
 
-    addToPlaylist(song) {
-        return(axios.post(`${API_URL}/playlist`, {
+    addToPlaylist(song, playlistName) {
+        return(axios.put(`${API_URL}/playlist`, {
             name: song.name,
             code: song.code,
-            user_token: this.user_token
+            user_token: this.user_token,
+            playlist_name: playlistName
         }));
+    }
+
+    get_playlist(playlistName) {
+        return(axios.get(`${API_URL}/getList?name=${playlistName}&user=${this.user_token}`));
+
     }
 }
 

@@ -6,6 +6,8 @@ import Register from './components/Register'
 import Search from './components/Search'
 import Login from './components/Login'
 import Logout from './components/Logout'
+import Playlist from './components/Playlist'
+
 
 const djangoService=new DjangoService();
 
@@ -16,12 +18,13 @@ function App () {
     return (
       <div className="App">
         {
-          !{authenticated} ? 
-          <div> 
+          authenticated ? 
+          <div>
             <Home />
             <Search djangoService = {djangoService}/>
             <Logout djangoService = {djangoService} setAuthenticated = {setAuthenticated}/>
-            <Player /> 
+            <Playlist djangoService = {djangoService} />
+            {/* <Player /> */}
           </div>
           :
           <div>

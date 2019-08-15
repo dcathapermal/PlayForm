@@ -7,7 +7,7 @@ function Search(props){
     const handleSubmit=(e)=>{
         e.preventDefault()
         props.djangoService.song_search(query).then((response)=> {
-            setResults(response.data, () => console.log(results));
+            setResults(response.data);
         });
     }
 
@@ -25,10 +25,11 @@ function Search(props){
 
             {results.map((item, index) => (
                 <div key={index}>
-                    <button onClick={() => props.djangoService.addToPlaylist(item)}>Add To Playlist</button>
+                    <button onClick={() => props.djangoService.addToPlaylist(item, 'default')}>Add To Playlist</button>
                     <a href={`https://www.youtube.com/watch?v=${item.code}`}>{item.name}</a>
                     <br />
                     <br />
+{/* change 'default' */}
                 </div>
             ))}
         </div>
