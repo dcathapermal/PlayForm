@@ -33,7 +33,7 @@ const Login=(props) => {
 
                 <br />
                 <Grid item xs={12}>
-                    <FormControl style={{width: 600}}>
+                    <FormControl style={{width: 400}}>
                         <InputLabel htmlFor="username">Username</InputLabel>
                         <Input
                             id="username"
@@ -44,7 +44,7 @@ const Login=(props) => {
                 </Grid>
                 <br />
                 <Grid item xs={12}>
-                <FormControl style={{width: 600}}>
+                <FormControl style={{width: 400}}>
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input
                         id="password"

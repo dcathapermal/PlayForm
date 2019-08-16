@@ -35,7 +35,7 @@ const Register=(props) => {
 
                 <br />
                 <Grid item xs={12}>
-                    <FormControl style={{width: 600}}>
+                    <FormControl style={{width: 400}}>
                         <InputLabel htmlFor="username">Username</InputLabel>
                         <Input
                             id="username"
@@ -46,7 +46,7 @@ const Register=(props) => {
                 </Grid>
                 <br />
                 <Grid item xs={12}>
-                    <FormControl style={{width: 600}}>
+                    <FormControl style={{width: 400}}>
                         <InputLabel htmlFor="email">Email</InputLabel>
                         <Input
                             id="email"
@@ -57,7 +57,7 @@ const Register=(props) => {
                 </Grid>
                 <br />
                 <Grid item xs={12}>
-                    <FormControl style={{width: 600}}>
+                    <FormControl style={{width: 400}}>
                         <InputLabel htmlFor="password">Password</InputLabel>
                         <Input
                             id="password"
@@ -69,7 +69,7 @@ const Register=(props) => {
                 </Grid>
                 <br />
                 <Grid item xs={12}>
-                <FormControl style={{width: 600}}>
+                <FormControl style={{width: 400}}>
                     <InputLabel htmlFor="password2">Confirm Password</InputLabel>
                     <Input
                         id="password2"

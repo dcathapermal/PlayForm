@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import Player from './components/Player'
 import Home from './components/Home'
 import DjangoService from './components/djangoService'
 import Register from './components/Register'
-import Search from './components/Search'
 import Login from './components/Login'
-import Logout from './components/Logout'
-import Playlist from './components/Playlist'
 
 
 const djangoService=new DjangoService();
@@ -24,14 +20,11 @@ function App () {
           :
           authenticated ? 
           <div>
-            <Search djangoService = {djangoService}/>
-            <Logout djangoService = {djangoService} setAuthenticated = {setAuthenticated}/>
-            <Playlist djangoService = {djangoService} />
+            <Home djangoService = {djangoService} setAuthenticated = {setAuthenticated} />
           </div>
           :
           <div>
-              <Login djangoService = {djangoService} setAuthenticated = {setAuthenticated} setSignUp={setSignUp} />
-
+            <Login djangoService = {djangoService} setAuthenticated = {setAuthenticated} setSignUp={setSignUp} />
           </div>
         }
       </div>
