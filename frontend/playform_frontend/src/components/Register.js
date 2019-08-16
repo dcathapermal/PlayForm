@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Button, Container, Input, FormControl, InputLabel, Grid, Typography} from '@material-ui/core';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 
 const Register=(props) => {
 
@@ -9,61 +11,82 @@ const Register=(props) => {
     const [error, setError]=useState("");
 
     const handleSubmit=(event) => {
-        event.preventDefault()
-        props.djangoService.create_user(userName, email, password, password2).then((response) => {
-            // Success :tada:
-            console.log(response);
-        })
-        .catch((error) => {
-            // Error :fearful:
-            if (error.response) {
-                /*
-                 * The request was made and the server responded with a
-                 * status code that falls out of the range of 2xx
-                 */
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                setError()
-            } else if (error.request) {
-                /*
-                 * The request was made but no response was received, error.request
-                 * is an instance of XMLHttpRequest in the browser and an instance
-                 * of http.ClientRequest in Node.js
-                 */
-                console.log(error.request);
-            } else {
-                // Something happened in setting up the request and triggered an Error
-                console.log('Error', error.message);
-            }
-            console.log(error.config);
-        });
+        event.preventDefault();
+        props.djangoService.create_user(userName, email, password, password2);
+        props.setSignUp(false);
     }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <div>
-            <label>Username</label>
-            <input value={userName} onChange={(e) => setUserName(e.target.value)}></input>
-            </div>
-            <br />
-            <div>
-            <label>Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-            </div>
-            <br />
-            <div>
-            <label>Password (minimum of 6 characters)</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-            </div>
-            <br />
-            <div>
-            <label>Confirm Password (minimum of 6 charaters)</label>
-            <input type="password" value={password2} onChange={(e) => setPassword2(e.target.value)}></input>
-            </div>
-            {/* <button onClick={() => props.djangoService.login(userName, password)}>Login</button> */}
-            <button>Sign Up</button>
-        </form>
+        <Container>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{ minHeight: '100vh' }}
+            >
+                <Grid item xs={3}>
+                    <PersonAdd style={{width:"40", height:"40"}}/>
+                </Grid>
+                <Grid item xs={9}>
+                    <Typography variant="h4">Register</Typography> 
+                </Grid>
+
+                <br />
+                <Grid item xs={12}>
+                    <FormControl style={{width: 600}}>
+                        <InputLabel htmlFor="username">Username</InputLabel>
+                        <Input
+                            id="username"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                        />
+                    </FormControl>
+                </Grid>
+                <br />
+                <Grid item xs={12}>
+                    <FormControl style={{width: 600}}>
+                        <InputLabel htmlFor="email">Email</InputLabel>
+                        <Input
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </FormControl>
+                </Grid>
+                <br />
+                <Grid item xs={12}>
+                    <FormControl style={{width: 600}}>
+                        <InputLabel htmlFor="password">Password</InputLabel>
+                        <Input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </FormControl>
+                </Grid>
+                <br />
+                <Grid item xs={12}>
+                <FormControl style={{width: 600}}>
+                    <InputLabel htmlFor="password2">Confirm Password</InputLabel>
+                    <Input
+                        id="password2"
+                        type="password"
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}
+                    />
+                    <br />
+                </FormControl>
+               </Grid>
+               <br/>
+               <Grid item xs={12}>
+               <Button style={{marginRight: 50}} onClick={() => props.setSignUp(false)}>Back</Button>
+               <Button style={{backgroundColor: "#00bf8f", color: "#fff"}} variant="contained"  onClick={handleSubmit}>Register</Button>
+               </Grid>
+            </Grid>
+        </Container>
     )
 } 
 

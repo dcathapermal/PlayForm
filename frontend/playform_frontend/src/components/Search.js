@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
 
+const divStyle = {
+    margin: '40px',
+    border: '5px solid pink'
+  };
+
 function Search(props){
 
     const [query, setQuery]=useState("");
@@ -12,7 +17,7 @@ function Search(props){
     }
 
     return(
-        <div>
+        <div style = {divStyle}>
             <h1>Search Song</h1>
             <form onSubmit={handleSubmit}>
                 <label>Search Song:</label>

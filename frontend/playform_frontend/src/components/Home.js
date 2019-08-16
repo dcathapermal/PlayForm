@@ -1,8 +1,9 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 function Home(){
     return (
-        <h1>Homepage</h1>
+        <Typography variant="h1">PlayForm</Typography>
     )
 }
 

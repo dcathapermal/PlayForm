@@ -1,29 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
+import ReactPlayer from 'react-player'
 
-function Player(){
+function Player(props){
+    
+  const [playing, setPlaying] = useState(false);
+  const [currentSong, setCurrentSong] = useState(0);
+  
+  // const handleSubmit=()=>{
+  //     props.djangoService.get_playlist('default').then((response)=> {
+  //         setPlaylist(response.data);
+  //     })}
+   
+
+
     return (
-        <div
-          className="video"
-          style={{
-            position: "relative",
-            paddingBottom: "56.25%" /* 16:9 */,
-            paddingTop: 25,
-            height: 0
-          }}
-        >
-          <iframe
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "25%",
-              height: "25%"
-            }}
-            src='https://www.youtube.com/embed/OoItSYcrB40?rel=0;&autoplay=1'
-            frameBorder="0"
-          />
-
+      <div>
+        {props.list.length > 0
+        ?
+        <div>
+        <button onClick={(e) => setPlaying(true)}>
+          Play
+        </button>
+        <button onClick={(e) => setCurrentSong((((currentSong - 1) % props.list.length) +props.list.length) % props.list.length)}>Back</button>
+        <button onClick={(e) => setCurrentSong((currentSong + 1) % props.list.length)}>Skip</button>
         </div>
+        :
+        null
+        }
+        
+        {playing && props.list.length > 0
+          ?
+          <ReactPlayer controls={true}
+          url={`https://www.youtube.com/watch?v=${props.list[currentSong].code}}`}
+          onEnded={() => setCurrentSong((currentSong + 1) % props.list.length)}
+          playing />
+          : 
+          null
+        }
+      </div>
     )
 }
 

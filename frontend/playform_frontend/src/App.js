@@ -14,22 +14,24 @@ const djangoService=new DjangoService();
 function App () {
 
   const [authenticated, setAuthenticated] = useState(false);
+  const [signUp, setSignUp] = useState(false);
 
     return (
       <div className="App">
         {
+          signUp ?
+          <Register djangoService = {djangoService} setSignUp={setSignUp}/>
+          :
           authenticated ? 
           <div>
-            <Home />
             <Search djangoService = {djangoService}/>
             <Logout djangoService = {djangoService} setAuthenticated = {setAuthenticated}/>
             <Playlist djangoService = {djangoService} />
-            {/* <Player /> */}
           </div>
           :
           <div>
-          <Login djangoService = {djangoService} setAuthenticated = {setAuthenticated} />
-          <Register djangoService = {djangoService} />
+              <Login djangoService = {djangoService} setAuthenticated = {setAuthenticated} setSignUp={setSignUp} />
+
           </div>
         }
       </div>

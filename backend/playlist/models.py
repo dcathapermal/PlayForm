@@ -12,6 +12,5 @@ class Playlist(models.Model):
     songs = models.ManyToManyField(Song)
 
 # class UserSettings(models.Model):
-#     # user = models.OneToOneField(User, on_delete=models.CASCADE)
 #     user = models.TextField(default = "")
 #     playlists = models.ManyToManyField(Playlist) 
